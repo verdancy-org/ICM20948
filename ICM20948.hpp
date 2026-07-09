@@ -2,7 +2,7 @@
 
 // clang-format off
 /* === MODULE MANIFEST V2 ===
-module_description: TDK ICM-20948 I2C 9-axis IMU driver with gyro calibration, topic publish, and shell status command
+module_description: XRobot Module for TDK InvenSense ICM-20948 9-axis IMU sensor
 constructor_args:
   - data_rate: ICM20948::DataRate::RATE_225HZ
   - accl_range: ICM20948::AcclRange::RANGE_2G
@@ -17,10 +17,10 @@ constructor_args:
   - accl_topic_name: "icm20948_accl"
   - magn_topic_name: "icm20948_magn"
   - task_stack_depth: 2048
-  - i2c_name: "i2c1"
-  - int_pin_name: "IMU_INT"
+  - i2c_name: "icm20948_i2c"
+  - int_pin_name: "icm20948_int"
 template_args: []
-required_hardware: i2c1/I2C1 IMU_INT ramfs database
+required_hardware: icm20948_i2c icm20948_int ramfs database
 depends: []
 === END MANIFEST === */
 // clang-format on
@@ -80,8 +80,8 @@ class ICM20948 : public LibXR::Application {
            MagMode mag_mode, LibXR::Quaternion<float>&& rotation,
            const char* gyro_topic_name, const char* accl_topic_name,
            const char* magn_topic_name, size_t task_stack_depth,
-           const char* i2c_name = "i2c1",
-           const char* int_pin_name = "IMU_INT")
+           const char* i2c_name = "icm20948_i2c",
+           const char* int_pin_name = "icm20948_int")
       : data_rate_(data_rate),
         accl_range_(accl_range),
         gyro_range_(gyro_range),
